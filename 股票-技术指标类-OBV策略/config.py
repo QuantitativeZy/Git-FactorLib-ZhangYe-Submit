@@ -60,9 +60,9 @@ config_all = {
 # 本地总CONFIG
 CONFIG = {
     # 因子路径，因子所在文件夹名称
-    "factor_path": ["股票-技术指标类-DMI"],
+    "factor_path": ["股票-技术指标类-OBV"],
     # 因子名称
-    "factor_name": ["DMI"],
+    "factor_name": ["OBV"],
     # 配置标号
     "config_index": [],
     # all_factor层是否并行
@@ -80,19 +80,19 @@ CONFIG = {
     # 回测结束日期
     "end_date": ['2023-09-30'],
     # 回测频率
-    "frequency": [],  # "daily"
+    "frequency": [],
     # 调仓周期（每多少个交易日更新一次股票池）；这个跟daily等交易频率互斥；
     "SELECT_INTERVAL": [1],  # 5
     # 买入周期（每多少个交易日执行一次买入操作）；
-    "BUY_INTERVAL": [1],  # 2
+    "BUY_INTERVAL": [1],
     # 卖出周期（每多少个交易日执行一次卖出操作）；默认与买入周期相同
-    "SELL_INTERVAL": [1],  # 2
+    "SELL_INTERVAL": [1],
     # 账户类型
     "account_type": ["stock"],
     # 回测基准，字典
     "benchmark": [{"000300.XSHG": 1}],  # {"000300.XSHG": 0.7, "110044.XSHG": 0.3}
     # 择时策略中的股票
-    "security": ['000300.XSHG', '601088.XSHG'],  # '002267.XSHE', '002268.XSHE'
+    "security": ['000300.XSHG', '600655.XSHG'],
     # 股票池
     "universe": ["hs300"],
     # 初始现金
@@ -171,12 +171,10 @@ config_custom = {
     "Tel": ["13915263537"],
     "mail": ["863347961@qq.com"],
     "organazation": ["中南财经政法大学"],
-    "window1": [14],
-    "window2": [6]
+    'window': [9]
 }
 
 CONFIG_factor = {**CONFIG, **config_custom}
-
 '''
 默认CONFIG
 default_config = {

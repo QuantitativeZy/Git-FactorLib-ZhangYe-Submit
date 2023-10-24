@@ -176,6 +176,7 @@ config_custom = {
 }
 
 CONFIG_factor = {**CONFIG, **config_custom}
+
 '''
 默认CONFIG
 default_config = {

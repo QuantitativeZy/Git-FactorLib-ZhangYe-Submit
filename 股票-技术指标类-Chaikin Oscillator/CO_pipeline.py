@@ -3,7 +3,6 @@
 import concurrent.futures
 import os
 import pandas as pd
-
 import backtest
 import cal_metric
 import dataGet_Func as dataGet

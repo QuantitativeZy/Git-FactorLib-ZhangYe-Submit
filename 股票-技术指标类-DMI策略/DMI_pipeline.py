@@ -263,8 +263,8 @@ def multi_run(CONF={}):
             multi_run_result[f"config{index}"] = result
             # 添加原始表格
             multi_run_all_result[f"config{index}"] = all_result
-            # 输出multi_run结果
-            # output.multirun_output(CONF_merge, result, all_result)
+    # 输出multi_run结果
+    output.multirun_output(CONF_merge, result, all_result)
 
     return multi_run_result, multi_run_all_result
 
