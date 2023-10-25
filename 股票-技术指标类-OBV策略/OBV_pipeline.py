@@ -21,16 +21,22 @@ class G:
 g = G()
 
 
+# 能量潮
 def OBV(df):
     return (((df.close.diff(1).fillna(0) >= 0) * 2 - 1) * df.vol).cumsum()
 
 
+# 移动能量潮
 def SMOBV(df, window):
-    return df.obv.rolling(window).mean()
+    return OBV(df).rolling(window).mean()
 
 
 def Adj_OBV(df):
-    return (df.close - df.low) - (df.high - df.close) / (df.high - df.low)
+    return (df.close - df.low) - (df.high - df.close) / (df.high - df.low) * df.vol
+
+
+def Adj_OBVd(df):
+    return Adj_OBV(df).cumsum()
 
 
 def initialize(context):
@@ -58,7 +64,7 @@ def initialize(context):
 
     # 计算AdjOBV和AdjOBVd
     g.stock['adjobv'] = Adj_OBV(g.stock)
-    g.stock['adjobvd'] = g.stock['adjobv'].cumsum()
+    g.stock['adjobvd'] = Adj_OBVd(g.stock)
 
     g.stock = g.stock[(g.stock.index >= context.start_date) & (g.stock.index <= context.end_date)]
 
@@ -189,6 +195,7 @@ def run(conf={}):
         after_trading(context)
     # 执行回测结束后处理操作
     result, all_result = after_all_trading(context)
+
     context.portfolio_return.to_excel(f'./result/config{context.config_index}/portfolio_return.xlsx')
 
     return result, all_result, context.config_index
@@ -237,8 +244,8 @@ def multi_run(CONF={}):
             multi_run_result[f"config{index}"] = result
             # 添加原始表格
             multi_run_all_result[f"config{index}"] = all_result
-            # 输出multi_run结果
-            # output.multirun_output(CONF_merge, result, all_result)
+    # 输出multi_run结果
+    output.multirun_output(CONF_merge, result, all_result)
 
     return multi_run_result, multi_run_all_result
 
